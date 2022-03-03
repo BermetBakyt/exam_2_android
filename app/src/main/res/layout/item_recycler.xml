@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.appcompat.widget.AppCompatImageView
-    android:id="@+id/image_ch"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/imageCharacter"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    app:layout_constraintVertical_chainStyle="packed"
+    android:src="@drawable/ic_launcher_background"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@id/name"
     app:layout_constraintStart_toStartOf="parent"
@@ -16,35 +18,48 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/image_ch"
+        app:layout_constraintTop_toBottomOf="@id/imageCharacter"
         app:layout_constraintBottom_toTopOf="@id/id"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="type"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/name"
-        app:layout_constraintBottom_toTopOf="species"
+        app:layout_constraintBottom_toTopOf="@id/species"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="type"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/id"
-        app:layout_constraintBottom_toTopOf=""
+        app:layout_constraintBottom_toTopOf="@id/location"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="type"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/id"
+        app:layout_constraintTop_toBottomOf="@id/species"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="type"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

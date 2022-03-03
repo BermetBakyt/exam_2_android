@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ber.exam2android.databinding.FragmentInfoBinding
+import com.bumptech.glide.Glide
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -33,11 +34,14 @@ class InfoFragment: Fragment(R.layout.fragment_info) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess{
                     name.text = "Name ${it.name}"
-                    id.text = "ID: ${it.character_id}"
                     status.text = "Status: ${it.status}"
                     species.text = "Species: ${it.species}"
                     gender.text = "Gender: ${it.gender}"
                     location.text = "Location: ${it.location}"
+                    val img = imageCharacter
+                    Glide.with(requireActivity())
+                        .load(it.image)
+                        .into(img)
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
