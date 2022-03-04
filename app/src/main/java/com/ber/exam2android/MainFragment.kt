@@ -39,19 +39,42 @@ class MainFragment: Fragment(R.layout.fragment_main) {
                 listener.onItemClicked(it)
             }
             recycler.adapter = adapter
-            recycler.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+            recycler.addItemDecoration(DividerItemDecoration(requireContext(),
+                RecyclerView.VERTICAL))
         }
-
-        characterApi.getRepositories()
+        getAll()
+        refreshApp()
+    }
+    private fun getAll() {
+    characterApi.getRepositories()
             .subscribeOn(Schedulers.io())
-            //.map{ it.results }
+        .map {
+            val listChar = mutableListOf<Character>()
+            it.results.forEach{
+                val character = Character(
+                    character_id = it.character_id,
+                    name = it.name,
+                    status = it.status,
+                    species = it.species,
+                    gender = it.gender,
+                    image = it.image,
+                    date_created = it.date_created
+                )
+                listChar.add(character)
+            }
+            listChar.toList()
+        }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext {
-                adapter.setData(it.results)
+                adapter.setData(it)
             }
             .doOnError {
-                Log.e("Ber","error $it")
+                Toast.makeText(requireContext(), "error", Toast.LENGTH_LONG).show()
             }
+        .doFinally{
+            binding.swipeToRefresh.isRefreshing = false
+            Log.e("TAG", "refresh")
+        }
             .subscribe()
     }
 
