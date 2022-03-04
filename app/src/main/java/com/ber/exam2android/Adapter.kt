@@ -1,5 +1,6 @@
 package com.ber.exam2android
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,12 @@ import com.bumptech.glide.Glide
 
 class Adapter (
     private val click: (id: Long) -> Unit): RecyclerView.Adapter<Adapter.ViewHolder>() {
-        private var list: List<Response.Character> = listOf()
+        private var list: List<Character> = listOf()
 
-        fun setData(list: List<Response.Character>){
+        fun setData(list: List<Character>){
             this.list = list
             notifyDataSetChanged()
+            Log.e("Ber","setData")
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView: View = LayoutInflater.from(parent.context)
@@ -38,23 +40,20 @@ class Adapter (
             private val click: (id: Long) -> Unit
         ) : RecyclerView.ViewHolder(itemView) {
 
-            fun bind(item: Response.Character) {
+            fun bind(item: Character) {
                 val img = itemView.findViewById<AppCompatImageView>(R.id.imageCharacter)
                 val txtStatus = itemView.findViewById<AppCompatTextView>(R.id.status)
                 val txtSpecies = itemView.findViewById<AppCompatTextView>(R.id.species)
-                val txtLocationName = itemView.findViewById<AppCompatTextView>(R.id.location)
                 val name = itemView.findViewById<AppCompatTextView>(R.id.name)
                 name.text = item.name
 
                 Glide.with(itemView.context)
                     .load(item.image)
                     .into(img)
-                txtStatus.text = item.status
-                txtSpecies.text = item.species
-                txtLocationName.text = item.location
-
+                item.status?.let { txtStatus.text = it }
+                item.species?.let{ txtSpecies.text = it }
                 itemView.setOnClickListener {
-                    click.invoke(item.character_id!!)
+                    click.invoke(item.character_id)
                 }
             }
         }

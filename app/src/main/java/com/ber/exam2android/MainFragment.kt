@@ -44,9 +44,10 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         characterApi.getRepositories()
             .subscribeOn(Schedulers.io())
+            //.map{ it.results }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext {
-                adapter.setData(it)
+                adapter.setData(it.results)
             }
             .doOnError {
                 Log.e("Ber","error $it")

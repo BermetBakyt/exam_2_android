@@ -30,14 +30,13 @@ class InfoFragment: Fragment(R.layout.fragment_info) {
         binding.apply {
             api.getCharacterById(id)
                 .subscribeOn(Schedulers.io())
-                .map { it.first() }
+
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess{
                     name.text = "Name ${it.name}"
                     status.text = "Status: ${it.status}"
                     species.text = "Species: ${it.species}"
                     gender.text = "Gender: ${it.gender}"
-                    location.text = "Location: ${it.location}"
                     val img = imageCharacter
                     Glide.with(requireActivity())
                         .load(it.image)

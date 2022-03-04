@@ -7,8 +7,8 @@ import retrofit2.http.Path
 
 interface CharacterApi {
     @GET("character")
-    fun getRepositories(): Observable<List<Response.Character>>
+    fun getRepositories(): Observable<Response>
 
     @GET("character/{id}")
-    fun getCharacterById(@Path("id")id: Long): Single<List<Response.Character>>
+    fun getCharacterById(@Path("id")id: Long): Single<Character>
 }
