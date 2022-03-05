@@ -30,8 +30,6 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
         _binding = FragmentMainBinding.bind(view)
 
-        refreshApp()
-
         binding.apply {
             val layoutManager = LinearLayoutManager(requireContext())
             recycler.layoutManager = layoutManager
@@ -83,6 +81,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         _binding = null
     }
     private fun refreshApp() {
+        getAll()
         binding.swipeToRefresh.setOnRefreshListener {
             Toast.makeText(requireContext(), "Page is refreshed", Toast.LENGTH_LONG).show()
             binding.swipeToRefresh.isRefreshing = false
